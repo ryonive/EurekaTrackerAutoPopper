@@ -16,6 +16,7 @@ public unsafe class MapMarkerController : IDisposable
 {
     private const float MiniMapMarkerRadius = 300.0f;
     private const float RefreshRadius = 150.0f;
+    private const float FlagMarkerRadius = 20.0f;
 
     private readonly Plugin Plugin;
     private readonly MapOverlayController MapOverlayController;
@@ -27,6 +28,7 @@ public unsafe class MapMarkerController : IDisposable
     private bool HasMarkersToRemove;
 
     private Vector3 LastPlayerPos = Vector3.Zero;
+    private Vector3 LastFlagPos = Vector3.Zero;
 
     public MapMarkerController(Plugin plugin)
     {
@@ -75,7 +77,15 @@ public unsafe class MapMarkerController : IDisposable
             return;
         }
 
+        var flagPos = Vector3.Zero;
+        if (agentMap->FlagMarkerCount > 0)
+        {
+            var flag = agentMap->FlagMapMarkers[0];
+            flagPos = new Vector3(flag.XFloat, 0, flag.YFloat);
+        }
+
         NeedsRefresh |= Utils.GetDistance(local.Position, LastPlayerPos) > RefreshRadius;
+        NeedsRefresh |= flagPos != LastFlagPos;
         if (!NeedsRefresh)
             return;
 
@@ -84,6 +94,7 @@ public unsafe class MapMarkerController : IDisposable
         NeedsRefresh = false;
         HasMarkersToRemove = true;
         LastPlayerPos = local.Position;
+        LastFlagPos = flagPos;
 
         var territory = Plugin.ClientState.TerritoryType;
         if (TerritoryHelper.PlayerInEureka())
@@ -225,7 +236,8 @@ public unsafe class MapMarkerController : IDisposable
     {
         var mapPos = worldPos;
         var agentMap = AgentMap.Instance();
-        if (Utils.GetDistance(worldPos, LastPlayerPos) > MiniMapMarkerRadius)
+
+        if (Utils.GetDistance(worldPos, LastPlayerPos) > MiniMapMarkerRadius && Utils.GetDistance(worldPos with {Y = 0}, LastFlagPos) > FlagMarkerRadius)
         {
             // TODO: Remove once KTK offset bug is fixed
             if ((Territory)Plugin.ClientState.TerritoryType == Territory.Hydatos)
