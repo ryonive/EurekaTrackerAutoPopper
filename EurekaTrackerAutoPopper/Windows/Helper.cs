@@ -18,7 +18,7 @@ public static class Helper
     private static readonly Vector2 IconSize = new(32, 32);
 
     private static readonly int[] SoundEffects = [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52];
-    public static bool AddSoundOption(int id, string text, ref bool playSound, ref int soundEffect)
+    public static unsafe bool AddSoundOption(int id, string text, ref bool playSound, ref int soundEffect)
     {
         var changed = false;
 

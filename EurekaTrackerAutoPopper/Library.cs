@@ -81,7 +81,7 @@ public class Library
         ExistingOccultLocations.Clear();
     }
 
-    public static readonly Dictionary<ushort, short> TerritoryToTrackerDictionary = new()
+    public static readonly Dictionary<uint, byte> TerritoryToTrackerDictionary = new()
     {
         { 827, 4 },
         { 795, 3 },
@@ -89,7 +89,7 @@ public class Library
         { 732, 1 },
     };
 
-    public IEnumerable<EurekaFate> TerritoryToFateDictionary(ushort territoryId)
+    public IEnumerable<EurekaFate> TerritoryToFateDictionary(uint territoryId)
     {
         return territoryId switch
         {

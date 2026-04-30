@@ -253,19 +253,7 @@ public class Plugin : IDalamudPlugin
         MapMarkerController.RemoveMapMarker();
     }
 
-    [Command("/ccc")]
-    [HelpMessage("Coordinatess")]
-    private void OnCoordCommand(string command, string args)
-    {
-        var local = ObjectTable.LocalPlayer;
-        if (local == null)
-            return;
-
-        var pos = local.Position;
-        ImGui.SetClipboardText($"new Vector3({pos.X}f, {pos.Y}f, {pos.Z}f)");
-    }
-
-    private void TerritoryChangePoll(ushort territoryId)
+    private void TerritoryChangePoll(uint territoryId)
     {
         // Notify the user once about upload opt out
         if (Configuration.UploadNotification)
@@ -353,7 +341,7 @@ public class Plugin : IDalamudPlugin
         return FateTable.SequenceEqual(LastPolledFates);
     }
 
-    private void CheckForRelevantFates(ushort currentTerritory)
+    private void CheckForRelevantFates(uint currentTerritory)
     {
         var newFateIds = FateTable.Except(LastPolledFates).Select(i => i.FateId).ToList();
         var relevantFates = Library.TerritoryToFateDictionary(currentTerritory);
@@ -378,7 +366,7 @@ public class Plugin : IDalamudPlugin
         }
     }
 
-    private void ProcessNewFate(Library.EurekaFate fate)
+    private unsafe void ProcessNewFate(Library.EurekaFate fate)
     {
         EchoNMPop();
 

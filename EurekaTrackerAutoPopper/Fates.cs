@@ -195,7 +195,7 @@ public class Fates
         new(48, 63978, Territory.SouthHorn, new Vector3(63.066174f, 126.499985f, 3.8296576f), [47868, 47734, 47735, 47736, 47737], OccultAetheryte.Eldergrowth, 25) // The Forked Tower: Blood
     ];
 
-    private void ScanOccultFates(IFramework _)
+    private unsafe void ScanOccultFates(IFramework _)
     {
         var local = Plugin.ObjectTable.LocalPlayer;
         if (local == null)

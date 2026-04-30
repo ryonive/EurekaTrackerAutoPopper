@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Dalamud.NET.Sdk/14.0.2">
+<Project Sdk="Dalamud.NET.Sdk/15.0.0">
 	<PropertyGroup>
 		<Authors>Infi, electr0sheep</Authors>
-		<Version>1.7.0.1</Version>
+		<Version>1.7.1.0</Version>
         <PackageProjectUrl>https://github.com/Infiziert90/EurekaTrackerAutoPopper</PackageProjectUrl>
         <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
         <IsPackable>false</IsPackable>
@@ -33,12 +33,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="KamiToolKit" Version="1.1.0" />
 	  <PackageReference Include="Penumbra.Api" Version="5.13.1" />
 	  <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
 	  <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.7" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\KamiToolKit\KamiToolKit.csproj" />
 	</ItemGroup>
 </Project>

@@ -64,7 +64,7 @@ public class FastSwitchOverlay : Window, IDisposable
     public override void Draw()
     {
         using var disabled = ImRaii.Disabled(Plugin.MapMarkerController.SavedOccultMarkerSets != null);
-        if (disabled.Success && ImGui.IsWindowHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        if (ImGui.IsWindowHovered(ImGuiHoveredFlags.AllowWhenDisabled))
             ImGui.SetTooltip(Language.AutoMarkerActiveWarning);
 
         var flagsChanged = false;

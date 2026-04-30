@@ -44,7 +44,7 @@ public static class Utils
     public static unsafe IGameObject[] GetTowerCharacter(Fate towerEngagement)
     {
         return Plugin.ObjectTable
-            .Where(o => o.ObjectKind == ObjectKind.Player)
+            .Where(o => o.ObjectKind == ObjectKind.Pc)
             .Where(o => Distance(towerEngagement.WorldPos, o.Position) <= 20.0f)
             .Where(o => ((BattleChara*)o.Address)->GetForayInfo()->Level >= 20)
             .ToArray();
