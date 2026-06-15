@@ -6,7 +6,7 @@ using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
 using Dalamud.Plugin.Services;
 using EurekaTrackerAutoPopper.Resources;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
-using KamiToolKit.Overlay.MapOverlay;
+using KamiToolKit.MapOverlay;
 
 using MapMarkerInfo = KamiToolKit.Classes.MapMarkerInfo;
 
@@ -19,6 +19,8 @@ public unsafe class MapMarkerController : IDisposable
     private const float FlagMarkerRadius = 20.0f;
 
     private readonly Plugin Plugin;
+
+    private bool EnableController = true;
     private readonly MapOverlayController MapOverlayController;
 
     public FlagMarkerSet MarkerSetToPlace = FlagMarkerSet.None;
@@ -57,6 +59,12 @@ public unsafe class MapMarkerController : IDisposable
 
     private void CheckPlayerRadius(IFramework _)
     {
+        if (EnableController)
+        {
+            EnableController = false;
+            MapOverlayController.Enable();
+        }
+
         if (!TerritoryHelper.PlayerInSupportedTerritory())
             return;
 

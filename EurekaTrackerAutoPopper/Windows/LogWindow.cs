@@ -59,8 +59,8 @@ public class LogWindow : Window, IDisposable
             if (table.Success)
             {
                 ImGui.TableSetupColumn(Language.TableLabelMonster);
-                ImGui.TableSetupColumn(Language.TableLabelDone, ImGuiTableColumnFlags.None, 0.4f);
-                ImGui.TableSetupColumn(Language.TableLabelEnemyLvl, ImGuiTableColumnFlags.None, 0.4f);
+                ImGui.TableSetupColumn(Language.TableLabelDone, ImGuiTableColumnFlags.WidthStretch, 0.4f);
+                ImGui.TableSetupColumn(Language.TableLabelEnemyLvl, ImGuiTableColumnFlags.WidthStretch, 0.4f);
 
                 ImGui.TableHeadersRow();
                 for (var i = 0; i < log.Count; i += 2)
