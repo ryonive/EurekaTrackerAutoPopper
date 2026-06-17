@@ -11,7 +11,7 @@
     },
     "routes": [
       {
-        "pattern": "tracker.infi.ovh",
+        "pattern": "tracker.xivstats.com",
         "custom_domain": true
       }
     ]
