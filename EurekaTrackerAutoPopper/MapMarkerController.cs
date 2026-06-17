@@ -54,7 +54,7 @@ public unsafe class MapMarkerController : IDisposable
         Plugin.Framework.Update -= CheckPlayerRadius;
 
         RemoveMapMarker();
-        MapOverlayController.Dispose();
+        Plugin.Framework.Run(() => MapOverlayController.Dispose());
     }
 
     private void CheckPlayerRadius(IFramework _)
