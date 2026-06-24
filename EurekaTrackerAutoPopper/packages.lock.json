@@ -16,9 +16,9 @@
       },
       "KamiToolKit": {
         "type": "Direct",
-        "requested": "[2.0.9, )",
-        "resolved": "2.0.9",
-        "contentHash": "ZpBHxoe1GY5ZME+Mh7wZM46u3miijTWK0MFArYzR1Pko7UM6oQNcnPAXCG94XkvMgY4pYtTeR+mvZiHqnPpaUw=="
+        "requested": "[2.0.23, )",
+        "resolved": "2.0.23",
+        "contentHash": "hvf+XnPqOQfbZv4FGKX1+Iq7i9CMi1/tvNazQ9yNl9CMdoSGWYZ2FCCbuOQPeFAiiDciA7UNm8dV9ksNjc1VKw=="
       },
       "Penumbra.Api": {
         "type": "Direct",

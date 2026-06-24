@@ -38,10 +38,11 @@ public unsafe class MapMarkerController : IDisposable
 
         MapOverlayController = new MapOverlayController();
         Plugin.Framework.Update += CheckPlayerRadius;
+        Plugin.ClientState.Logout += OnLogout;
+        Plugin.ClientState.Login += OnLogin;
 
         Plugin.AddonLifecycle.RegisterListener(AddonEvent.PostRefresh, "AreaMap", AddonMapRefresh);
     }
-
     private void AddonMapRefresh(AddonEvent type, AddonArgs args)
     {
         NeedsRefresh = true;
@@ -52,9 +53,33 @@ public unsafe class MapMarkerController : IDisposable
         Plugin.AddonLifecycle.UnregisterListener(AddonEvent.PostRefresh, "AreaMap", AddonMapRefresh);
 
         Plugin.Framework.Update -= CheckPlayerRadius;
+        Plugin.ClientState.Logout -= OnLogout;
+        Plugin.ClientState.Login -= OnLogin;
 
         RemoveMapMarker();
-        Plugin.Framework.RunOnFrameworkThread(() => MapOverlayController.Dispose());
+        Plugin.Framework.RunOnFrameworkThread(() =>
+        {
+            try
+            {
+                MapOverlayController.Dispose();
+            }
+            catch
+            {
+                // Ignore
+            }
+        });
+    }
+
+    private void OnLogin()
+    {
+        EnableController = true;
+    }
+
+    private void OnLogout(int type, int code)
+    {
+        EnableController = false;
+        MapOverlayController.RemoveAllMarkers();
+        MapOverlayController.Disable();
     }
 
     private void CheckPlayerRadius(IFramework _)
